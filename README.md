@@ -1,15 +1,15 @@
-# Desafio 3 do Ignite Trilha NodeJS
+# Desafio 6 do Ignite Trilha NodeJS
 
-<img alt="Ignite" src="./assets/cover-node.js.png" />
+<img alt="Ignite" src="./assets/capa_ignite.png" />
 
 <h3 align="center">
-  Desafio 03: Corrigindo o Código
+  Desafio 06: Database Queries
 </h3>
 
-<p align="center">“Faça seu melhor, mas sempre com prazo de entrega”!</blockquote>
+<p align="center">“Em teoria, teoria e prática são iguais. Na prática, não são”</blockquote>
 
 <p align="center">
-  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/TainaIsabela/Ignite-Node-Desafio-1?style=flat">
+  <img alt="GitHub top language" src="https://img.shields.io/github/languages/top/TainaIsabela/Ignite-Node-Desafio-3?style=flat">
 
   <a href="https://rocketseat.com.br">
     <img alt="Made by Tainá Isabela" src="https://img.shields.io/badge/made%20by-Tainá%20Isabela-orange">
@@ -17,8 +17,8 @@
 
   <img alt="License" src="https://img.shields.io/badge/license-MIT-%2304D361">
 
-  <a href="https://github.com/rocketseat-education/ignite-template-corrigindo-o-codigo/stargazers">
-    <img alt="Stargazers" src="https://img.shields.io/github/stars/rocketseat-education/ignite-template-corrigindo-o-codigo?style=social">
+  <a href="https://github.com/rocketseat-education/ignite-template-database-queries/stargazers">
+    <img alt="Stargazers" src="https://img.shields.io/github/stars/rocketseat-education/ignite-template-database-queries?style=social">
   </a>
 </p>
 
@@ -27,53 +27,45 @@
   <a href="#rocket-sobre-o-desafio">Sobre o desafio</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#keyboard-instalação-e-execução-do-projeto">Instalação e Execução do Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#template-da-aplicação">Template da aplicação</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#rotas-da-aplicação-instruções">Rotas da aplicação</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#repositórios-da-aplicação-instruções">Repositórios da aplicação</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#especificação-dos-testes-instruções">Específicação dos testes</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#memo-licença">Licença</a>
 </p>
 
 ## :rocket: Sobre o desafio
 
-Nesse desafio, tive que corrigir uma aplicação Node.js que está em processo de desenvolvimento e que já possui os testes necessários para fazer toda a validação dos requisitos sem mexer nos testes.
+Nesse desafio, precisei realizar consultas no banco de dados com o TypeORM de três maneiras:
 
-Foram feitas algumas alterações propositais no código da aplicação e, com isso, parte dos testes deixaram de passar. Agora só você pode resolver esse problema. Bora lá? 🚀
+- Usando o ORM
+- Usando Query Builder
+- Usando Raw Query
 
-Essa aplicação realiza o CRUD (**C**reate, **R**ead, **U**pdate, **D**elete) de repositórios de projetos. Além disso, é possível dar likes em repositórios cadastrados, aumentando a quantidade de likes em 1 a cada vez que a rota é chamada.
+No template constava uma aplicação já estruturada (apenas as entidades e repositórios) onde tive que completar o que falta nas consultas dos dois repositórios.
 
-A estrutura de um repositório ao ser criado é a seguinte: 
+A aplicação possui dois módulos: `users` e `games`. Um **usuário** pode ter vários jogos e um mesmo **jogo** pode estar associado a vários usuários.
 
-```jsx
-{
-  id: uuid(),
-  title,
-  url,
-  techs,
-  likes: 0
-}
-```
+Para conseguir rodar os testes corretamente, é preciso ter um banco de dados PostgreSQL rodando com os seguintes parâmetros:
 
-Descrição de cada propriedade:
+> - "username": "postgres",
+> - "password": "docker",
+> - "host": "localhost",
+> - "port": 5432,
+> - "database": "queries_challenge"
 
-- **id** deve ser um uuid válido;
-- **title** é o título do repositório (por exemplo "unform");
-- **url** é a URL que aponta para o repositório (por exemplo "[https://github.com/unform/unform](https://github.com/unform/unform)");
-- **techs** é um array onde cada elemento deve ser uma string com o nome de uma tecnologia relacionada ao repositório (por exemplo: ["react", "react-native", "form"]);
-- **likes** é a quantidade de likes que o repositório recebeu (e que vai ser incrementada de 1 em 1 a cada chamada na rota de likes).
+Para facilitar, o projeto possui um arquivo `docker-compose.yml` que já cria o container necessário, porém é preciso ter o Docker instalado em sua máquina: **[Instalação Docker](https://docs.docker.com/desktop/)**
 
-Note que a quantidade de likes deve sempre ser zero no momento de criação.
-
-### :keyboard: Instalação e Execução do Projeto
+## :keyboard: Instalação e Execução do Projeto
 
 - Clone este repositório
 
 ```
-> git clone https://github.com/TainaIsabela/Ignite-Node-Desafio-3.git
+> git clone https://github.com/prenato84/ignite-database-queries.git
 ```
 
 - Navegue até o diretório principal do projeto
 
 ```
-> cd ignite-template-corrigindo-o-codigo
+> cd ignite-database-queries
 ```
 
 - Instale as dependências com o Yarn
@@ -82,159 +74,186 @@ Note que a quantidade de likes deve sempre ser zero no momento de criação.
 yarn
 ```
 
+- Inicie um container docker com postgres utilizando o docker-compose
+
+```
+docker-compose up -d
+```
+
 - Rode a suite de testes
 
 ```
 yarn test
 ```
 
-- Execute o projeto
+- Pare e remova o container docker
 
 ```
-yarn dev
+docker-compose down
 ```
 
-### Template da aplicação
+<p align="center">
+  <img src="./assets/yarn_test.jpg">
+</p>
+
+## Template da aplicação
 
 Foi utilizado um modelo de template que possui o esqueleto do projeto.
 
-O template pode ser encontrado na seguinte url: **[Acessar Template](https://github.com/rocketseat-education/ignite-template-corrigindo-o-codigo)**
+O template pode ser encontrado na seguinte url: **[Acessar Template](https://github.com/rocketseat-education/ignite-template-database-queries)**
 
 > **Dica**: Caso não saiba utilizar repositórios do Github como template, utilize o guia em **[nosso FAQ](https://www.notion.so/ddd8fcdf2339436a816a0d9e45767664).**
 
-Agora navegue até a pasta criada e abra no Visual Studio Code, lembre-se de executar o comando `yarn` no seu terminal para instalar todas as dependências.
-### Rotas da aplicação (Instruções)
+Para que os testes funcionem, é importante que você crie uma database no banco Postgres com o nome queries_challenge:
 
-Documentação no Notion sobre a API e testes: **[Documentação API e Testes](hhttps://www.notion.so/Desafio-03-Corrigindo-o-c-digo-c15c8a2e212846039a367cc7b763c6dd#16f55f855f5942d0bf6df061c42119d9)**
+<p align="center">
+  <img  src="./assets/code_example.png">
+</p>
 
-#### POST `/repositories`
+## Repositórios da aplicação (Instruções)
 
-A rota deve receber `title`, `url` e `techs` pelo corpo da requisição e retornar um objeto com as informações do repositório criado e um status `204`.
+Documentação no Notion sobre os repositórios e testes: **[Documentação Repositórios e Testes](https://www.notion.so/Desafio-01-Database-Queries-8d97dae581d5446e97555c43d301ee45)**
 
-#### PUT `/repositories/:id`
+Com o repositório criado a partir do template e clonado na sua máquina, navegue até os arquivos **src/modules/users/repositories/implementations/UsersRepository.ts** e **src/modules/games/repositories/implementations/GamesRepository.ts**. 
+Esses deverão ser completados para que os testes sejam satisfeitos. 
 
-A rota deve receber `title`, `url` e `techs` pelo corpo da requisição e o `id` do repositório que deve ser atualizado pelo parâmetro da rota. Deve alterar apenas as informações recebidas pelo corpo da requisição e retornar esse repositório atualizado.
+Observe que alguns métodos já possuem parte do código inserido para indicar que você deve usar ORM, query builder ou raw query nas consultas.
 
-#### DELETE `/repositories/:id`
+#### UsersRepository
 
-A rota deve receber, pelo parâmetro da rota, o `id` do repositório que deve ser excluído e retornar um status `204` após a exclusão.
+- Método **findUserWithGamesById**
 
-#### POST `/repositories/:id/like`
+    Esse método deve receber o **Id** de um usuário e retornar os dados do usuário encontrado juntamente com os dados de todos os **games** que esse usuário possui.
 
-A rota deve receber, pelo parâmetro da rota, o `id` do repositório que deve receber o like e retornar o repositório com a quantidade de likes atualizada.
+    Exemplo de retorno:
+
+    ```jsx
+    {
+    	id: '81482ac4-29bd-497f-b71a-8ae3b20eca9b',
+    	first_name: 'Mary',
+    	last_name: 'Blood',
+    	email: 'mail@example.com',
+    	created_at: '2021-03-19 19:35:09.877037',
+    	updated_at: '2021-03-19 19:35:09.877037',
+    	games: [
+    		{
+    			id: '63a6c35a-ac97-4773-9021-fb93973c8139',
+    			title: 'Innocent',
+    			created_at: '2021-03-19 19:35:09.877037',
+    			updated_at: '2021-03-19 19:35:09.877037',
+    		},
+    		{
+    			id: '74e4fc3b-434d-4452-94eb-27a85dce8d1a',
+    			title: 'Kilers on Budapeste',
+    			created_at: '2021-03-19 19:35:09.877037',
+    			updated_at: '2021-03-19 19:35:09.877037',
+    		}
+    	]
+    }
+    ```
+
+- Método **findAllUsersOrderedByFirstName**
+
+    Esse método deve retornar a listagem de usuários cadastrados em ordem alfabética (**ASC**).
+
+    Lembre-se que aqui deve ser usado **raw query** para a consulta.
+
+- Método **findUserByFullName**
+
+    Esse método deve receber `first_name` e `last_name` e retornar um usuário que possua os mesmos `first_name` e `last_name`. Aqui você deve encontrar o usuário ignorando se o argumento passado está em caixa alta ou não. 
+
+    Por exemplo, suponhamos que existe um usuário onde o `first_name` é `Danilo` e o `last_name` é `Vieira`. O método deve retornar o usuário mesmo que os argumentos passados sejam `daNiLo` para `first_name` e `vIeiRA` para `last_name`. Essa consulta deve ser realizada utilizando **raw query** e você pode buscar pelo uso do **LOWER** no Postgres para resolver esse problema.
+
+#### GamesRepository
+
+- Método **findByTitleContaining**
+
+    Esse método deve receber parte do título de um jogo ou o título inteiro e retornar um ou mais jogos que derem match com a consulta. 
+
+    Se o método for chamado com o argumento `"or S"` e existir algum jogo com essa sequência de letras no título, o retorno deve ser feito, como por exemplo o seguinte retorno:
+
+    ```jsx
+    [
+    	{
+    		id: '63a6c35a-ac97-4773-9021-fb93973c8139',
+    		title: 'Need F**or S**peed: Payback',
+    		created_at: '2021-03-19 19:35:09.877037',
+    		updated_at: '2021-03-19 19:35:09.877037',
+    	},
+    	{
+    		id: '74e4fc3b-434d-4452-94eb-27a85dce8d1a',
+    		title: 'Need F**or S**peed: Underground',
+    		created_at: '2021-03-19 19:35:09.877037',
+    		updated_at: '2021-03-19 19:35:09.877037',
+    	}
+    ]
+    ```
+
+    A consulta também deve ser feita de forma case insensitive, ignorando caixa alta onde no banco não existe. Para exemplo, considerando a busca exemplificada acima, o retorno deve ser o mesmo caso o parâmetro passado seja uma string `"nEEd"`. 
+
+    Você pode buscar pelo uso do **ILIKE** no Postgres para resolver esse problema. Lembre-se que aqui deve ser usado **query builder** para realizar a consulta.
+
+- Método **countAllGames**
+
+    Esse método deve retornar uma contagem do total de games existentes no banco. Deve ser usada **raw query** para essa consulta.
+
+- Método **findUsersByGameId**
+
+    Esse método deve receber o `Id` de um game e retornar uma lista de todos os usuários que possuem o game do `Id` informado. 
+
+    Exemplo de retorno:
+
+    ```jsx
+    [
+    	{
+    		id: '81482ac4-29bd-497f-b71a-8ae3b20eca9b',
+    		first_name: 'Mary',
+    		last_name: 'Blood',
+    		email: 'mail@example.com',
+    		created_at: '2021-03-19 19:35:09.877037',
+    		updated_at: '2021-03-19 19:35:09.877037'
+    	},
+    	{
+    		id: '75920ac4-32ed-497f-b71a-8ae3c19eca9b',
+    		first_name: 'Usuário',
+    		last_name: 'Qualquer',
+    		email: 'usuarioqualquer@example.com',
+    		created_at: '2021-03-19 19:35:09.877037',
+    		updated_at: '2021-03-19 19:35:09.877037'
+    	}
+    ]
+    ```
 
 
-### Especificação dos testes (Instruções)
+## Especificação dos testes (Instruções)
 
-Em cada teste, tem uma breve descrição no que sua aplicação deve cumprir para que o teste passe.
-
-> :warning: Note que partes da aplicação já estão prontas e você precisará alterar apenas o que está errado (ou implementar algo que esteja faltando). 
-
-> :bulb: Se você achou algum trecho de código confuso ou pensou em uma melhor solução, sinta-se livre para também refatorar.
-
-> Caso você tenha dúvidas quanto ao que são os testes, e como interpretá\-los, dê uma olhada em **[nosso FAQ](https://www.notion.so/FAQ-Desafios-ddd8fcdf2339436a816a0d9e45767664)**.
+### Específicação dos testes
 
 Para esse desafio, temos os seguintes testes:
 
-#### Testes de repositórios
+- **[UsersRepository] should be able to find user with games list by user's ID**
 
-- **Should be able to create a new repository**
+    Para que esse teste passe, você deve satisfazer o código de acordo com o que é [descrito aqui](https://www.notion.so/Desafio-01-Database-Queries-8d97dae581d5446e97555c43d301ee45).
 
-Para que esse teste passe, você deve permitir que um novo repositório seja cadastrado pela rota **POST** `/repositories`. Caso precise confirmar o formato do objeto, você pode olhar [aqui.](https://www.notion.so/Desafio-03-Corrigindo-o-c-digo-c15c8a2e212846039a367cc7b763c6dd) 
+- **[UsersRepository] should be able to list users ordered by first name**
 
-Também é necessário que você retorne a resposta com o código `201`.
+    Para que esse teste passe, você deve satisfazer o código de acordo com o que é [descrito aqui](https://www.notion.so/Desafio-01-Database-Queries-8d97dae581d5446e97555c43d301ee45).
 
-- **Should be able to list the projects**
+- **[UsersRepository] should be able to find user by full name**
 
-Para que esse teste passe, é necessário que você conclua o teste anterior. Se tudo ocorreu bem, os repositórios cadastrados deverão aparecerem na listagem da rota **GET** `/repositories` e esse teste irá passar.
+    Para que esse teste passe, você deve satisfazer o código de acordo com o que é [descrito aqui.](https://www.notion.so/Desafio-01-Database-Queries-8d97dae581d5446e97555c43d301ee45)
 
-- **Should be able to update repository**
+- **[GamesRepository] should be able find a game by entire or partial given title**
 
-Para que esse teste passe, você deve permitir que um repositório seja atualizado a partir de seu `id` pela rota **PUT** `/repositories/:id` usando as [informações recebidas pelo corpo da requisição](https://www.notion.so/Desafio-03-Corrigindo-o-c-digo-c15c8a2e212846039a367cc7b763c6dd). Lembre-se de manter as informações que não foram passadas pelo corpo, por exemplo:
-Se o usuário quiser trocar apenas o `title`, mantenha `url` e `techs` que já estavam no repositório.
+    Para que esse teste passe, você deve satisfazer o código de acordo com o que é [descrito aqui](https://www.notion.so/Desafio-01-Database-Queries-8d97dae581d5446e97555c43d301ee45)[.](https://www.notion.so/Desafio-01-Database-Queries-8d97dae581d5446e97555c43d301ee45)
 
-- **Should not be able to update a non existing repository**
+- **[GamesRepository] should be able to get the total count of games**
 
-Para que esse teste passe, você deve verificar se o repositório existe antes de atualizar as informações na rota **PUT** `/repositories/:id`. Caso não exista, retorne um status `404` (que é o status para **Not Found**) com uma mensagem de erro no formato `{ error: "Mensagem do erro" }`.
+    Para que esse teste passe, você deve satisfazer o código de acordo com o que é [descrito aqui](https://www.notion.so/Desafio-01-Database-Queries-8d97dae581d5446e97555c43d301ee45).
 
-- **Should not be able to update repository likes manually**
+- **[GamesRepository] should be able to list users who have given game id**
 
-Para que esse teste passe, você deve impedir que a quantidade de likes de um repositório seja alterada manualmente através da rota **PUT** `/repositories/:id`.
-Por exemplo:
-
-**Errado:**
-
-```jsx
-// Repositório recém criado:
-{
-	id: "c160a99b-9d3b-4669-8a35-8dce1e8196ec",
-	title: "Umbriel",
-	techs: ["React", "ReactNative", "TypeScript", "ContextApi"],
-	url: "https://github.com/Rocketseat/umbriel",
-	likes: 0
-}
-
-// Requisição para alterar informações: 
-// Rota: "/repositories/c160a99b-9d3b-4669-8a35-8dce1e8196ec"
-// Método: PUT
-// Corpo: { title: "Novo título", likes: 10 }
-
-// Retorno:
-
-{
-	id: "c160a99b-9d3b-4669-8a35-8dce1e8196ec",
-	title: "Novo título",
-	techs: ["React", "ReactNative", "TypeScript", "ContextApi"],
-	url: "https://github.com/Rocketseat/umbriel",
-	likes: 10
-}
-```
-
-**Certo:**
-
-```jsx
-// Repositório recém criado:
-{
-	id: "c160a99b-9d3b-4669-8a35-8dce1e8196ec",
-	title: "Umbriel",
-	techs: ["React", "ReactNative", "TypeScript", "ContextApi"],
-	url: "https://github.com/Rocketseat/umbriel",
-	likes: 0
-}
-
-// Requisição para alterar informações: 
-// Rota: "/repositories/c160a99b-9d3b-4669-8a35-8dce1e8196ec"
-// Método: PUT
-// Corpo: { title: "Novo título", likes: 10 }
-
-// Retorno:
-
-{
-	id: "c160a99b-9d3b-4669-8a35-8dce1e8196ec",
-	title: "Novo título",
-	techs: ["React", "ReactNative", "TypeScript", "ContextApi"],
-	url: "https://github.com/Rocketseat/umbriel",
-	likes: 0 // A quantidade de likes não mudou
-}
-```
-
-- **Should be able to delete the repository**
-
-Para que esse teste passe, você deve permitir que um repositório seja excluído através do `id` passado pela rota **DELETE** `/repositories/:id`.
-
-- **Should not be able to delete a non existing repository**
-
-Para que esse teste passe, você deve validar se o repositório existe antes de excluí-lo. Caso o repositório não exista, retorne um status `404` com uma mensagem de erro no formato `{ error: "Mensagem do erro" }`.
-
-#### Testes de likes
-
-- **Should be able to give a like to the repository**
-
-Para que esse teste passe, deve ser possível incrementar a quantidade de likes em `1` a cada chamada na rota **POST** `/repositories/:id/like`. Use o `id` passado por parâmetro na rota para realizar essa ação.
-
-- **Should not be able to give a like to a non existing repository**
-
-Para que esse teste passe, você deve validar que um repositório existe antes de incrementar a quantidade de likes. Caso não exista, retorne um status `404` com uma mensagem de erro no formato `{ error: "Mensagem do erro" }`.
+    Para que esse teste passe, você deve satisfazer o código de acordo com o que é [descrito aqui](https://www.notion.so/Desafio-01-Database-Queries-8d97dae581d5446e97555c43d301ee45).
 
 ## :memo: Licença
 
