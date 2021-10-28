@@ -1,9 +1,9 @@
-# Desafio 6 do Ignite Trilha NodeJS
+# Desafio 3 do Ignite Trilha NodeJS
 
 <img alt="Ignite" src="./assets/capa_ignite.png" />
 
 <h3 align="center">
-  Desafio 06: Database Queries
+  Chapter 3: Database Queries e Modelagem do banco de dados
 </h3>
 
 <p align="center">“Em teoria, teoria e prática são iguais. Na prática, não são”</blockquote>
